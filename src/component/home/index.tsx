@@ -67,7 +67,7 @@ export const Home = () => {
     }
 
     const csvReport = {
-        data: ebayObjectList,
+        data: parseDataToCSV(ebayObjectList),
         filename: 'ebay.csv'
     };
 
