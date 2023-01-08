@@ -2,6 +2,7 @@ import { useState} from 'react'
 import axios from 'axios'
 import { parseDataToCSV } from "../../utils/parseDataToCSV";
 import { CSVLink } from 'react-csv'
+import './style.css'
 
 export type EbayObjectType = {
     title: string
@@ -72,7 +73,7 @@ export const Home = () => {
     };
 
     return (
-        <div>
+        <div className='container'>
             <input onChange={(e) => setUrl(e.target.value)} value={url}/>
             <button onClick={handleClick}>
                 Import
