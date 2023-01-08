@@ -4,12 +4,13 @@ import { parseDataToCSV } from "../../utils/parseDataToCSV";
 import { CSVLink } from 'react-csv'
 
 export type EbayObjectType = {
-    title: string,
-    price: string,
-    image: string,
-    ref: string,
+    title: string
+    price: string
+    image: string
+    ref: string
     condition: string
     quantity: string | undefined
+    url: string
 }
 export const Home = () => {
     const [url, setUrl] = useState('')
@@ -50,7 +51,8 @@ export const Home = () => {
                     image: parsedImage,
                     ref: parsedRef,
                     condition: parsedCondition,
-                    quantity: quantity
+                    quantity: quantity,
+                    url: url
                 }
 
                 return propsObject
@@ -59,8 +61,9 @@ export const Home = () => {
                 const newObjectArray = [...ebayObjectList]
                 newObjectArray.push(propsObject)
                 setEbayObjectList(newObjectArray)
-                console.log(parseDataToCSV(newObjectArray))
+                setUrl('')
             })
+
     }
 
     const csvReport = {
@@ -70,9 +73,9 @@ export const Home = () => {
 
     return (
         <div>
-            <input onChange={(e) => setUrl(e.target.value)}/>
+            <input onChange={(e) => setUrl(e.target.value)} value={url}/>
             <button onClick={handleClick}>
-                Login to ebay
+                Import
             </button>
             <ul>
                 {ebayObjectList.map((object: EbayObjectType) => (
