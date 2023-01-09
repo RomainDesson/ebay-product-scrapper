@@ -16,7 +16,8 @@ export type EbayObjectType = {
 export const Home = () => {
     const [url, setUrl] = useState('')
     const [ebayObjectList, setEbayObjectList] = useState<EbayObjectType[]>([])
-    const handleClick = () => {
+    const handleClick = (e: any) => {
+        e.preventDefault()
         axios.get(url)
             .then(res => {
                 const html = res.data
@@ -74,10 +75,12 @@ export const Home = () => {
 
     return (
         <div className='container'>
-            <input onChange={(e) => setUrl(e.target.value)} value={url}/>
-            <button onClick={handleClick}>
-                Import
-            </button>
+            <form>
+                <input onChange={(e) => setUrl(e.target.value)} value={url}/>
+                <button onClick={(e) => handleClick(e)} type='submit'>
+                    Import
+                </button>
+            </form>
             <ul>
                 {ebayObjectList.map((object: EbayObjectType) => (
                     <li id={object.ref}>
