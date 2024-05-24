@@ -25,16 +25,15 @@ export const Home = () => {
                 const document = parser.parseFromString(html, "text/html");
                 const title = document.querySelector('#LeftSummaryPanel .ux-textspans--BOLD')?.innerHTML ?? ''
                 const price = document.querySelector('.x-price-primary .ux-textspans')?.innerHTML ?? ''
-                const image = document.querySelector('.ux-image-carousel-item')
-                const ref = document.querySelectorAll('.ux-textspans--BOLD')[7]?.innerHTML ?? ''
+                const image = document.querySelector('.ux-image-magnify__container')
+                const ref = document.querySelectorAll('.ux-textspans--BOLD')[9]?.innerHTML ?? ''
                 const condition = document.querySelector('.ux-icon-text__text')?.querySelector('.clipped')?.innerHTML ?? ''
                 let quantity = document.querySelector('#qtySubTxt')?.querySelector('span')?.innerHTML
-
                 const parsedTitle = title?.substring(15, title.length - 9)
                 const parsedPrice = price?.substring(15, price?.length - 13)
                 // @ts-ignore
-                const parsedImage = image?.childNodes[0].src
-                const parsedRef = ref?.substring(15, ref.length - 9)
+                const parsedImage = image?.childNodes[1]?.src
+
                 const parsedCondition = condition
 
                 if (parsedCondition !== 'Occasion' && parsedCondition !== 'Remanufacturé') {
@@ -45,13 +44,11 @@ export const Home = () => {
                     quantity = quantity?.substring(0, quantity.length - 14)
                 }
 
-                console.log(quantity)
-
                 const propsObject: EbayObjectType = {
-                    title: parsedTitle,
+                    title: title,
                     price: parsedPrice,
                     image: parsedImage,
-                    ref: parsedRef,
+                    ref: ref,
                     condition: parsedCondition,
                     quantity: quantity,
                     url: url
